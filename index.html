@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sabor & Panela — Receitas</title>
+<meta name="description" content="Receitas, avaliações, favoritos e compartilhamento.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="brand-mark">🍳</div><h1>Sabor & Panela</h1>
+    <p>Receitas, dicas e sabores para todos os dias.</p>
+    <div class="auth-tabs"><button class="auth-tab active" data-tab="login">Entrar</button><button class="auth-tab" data-tab="register">Criar conta</button></div>
+    <form id="loginForm" class="auth-form">
+      <label>E-mail<input id="loginEmail" type="email" required placeholder="voce@email.com"></label>
+      <label>Senha<input id="loginPassword" type="password" required placeholder="Sua senha"></label>
+      <button class="primary-btn" type="submit">Entrar</button><p id="loginMessage" class="form-message"></p>
+    </form>
+    <form id="registerForm" class="auth-form hidden">
+      <label>Nome<input id="registerName" required minlength="2" placeholder="Seu nome"></label>
+      <label>E-mail<input id="registerEmail" type="email" required placeholder="voce@email.com"></label>
+      <label>Senha<input id="registerPassword" type="password" required minlength="6" placeholder="Mínimo de 6 caracteres"></label>
+      <label>Confirmar senha<input id="registerConfirm" type="password" required minlength="6"></label>
+      <button class="primary-btn" type="submit">Criar minha conta</button><p id="registerMessage" class="form-message"></p>
+    </form>
+    <small>Demonstração local: os dados ficam somente neste navegador.</small>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header class="header"><div class="container nav">
+<a class="logo" href="#inicio">🍳 <span>Sabor & Panela</span></a>
+<button id="menuBtn" class="menu-btn">☰</button>
+<nav id="navMenu"><a href="#inicio">Início</a><a href="#receitas">Receitas</a><a href="#favoritos">Favoritos</a><a href="#ranking">Ranking</a><a href="#dicas">Dicas</a></nav>
+<div class="user-area"><span id="userName"></span><button id="logoutBtn" class="logout-btn">Sair</button></div>
+</div></header>
+
+<main>
+<section id="inicio" class="hero"><div class="container hero-grid">
+<div class="reveal"><span class="eyebrow">🍴 COZINHE SEM COMPLICAÇÃO</span><h2>Seu lugar para descobrir, preparar e avaliar comidas.</h2>
+<p>Encontre receitas deliciosas, salve suas favoritas e compartilhe com quem você gosta.</p>
+<div class="hero-actions"><a class="primary-btn" href="#receitas">Explorar receitas</a><a class="secondary-btn" href="#ranking">Ver ranking</a></div></div>
+<div class="hero-art reveal"><div class="plate">🍝</div><div class="floating-card">⭐ Mais avaliada<br><strong>Macarrão cremoso</strong></div></div>
+</div></section>
+
+<section id="receitas" class="section"><div class="container">
+<div class="section-heading"><div><span class="eyebrow">RECEITAS</span><h2>O que você quer preparar?</h2></div><input id="searchInput" class="search" type="search" placeholder="🔎 Buscar receita..."></div>
+<div id="filters" class="filters"><button class="filter active" data-category="Todas">Todas</button><button class="filter" data-category="Almoço">Almoço</button><button class="filter" data-category="Jantar">Jantar</button><button class="filter" data-category="Sobremesa">Sobremesa</button><button class="filter" data-category="Lanche">Lanche</button><button class="filter" data-category="Café da manhã">Café da manhã</button></div>
+<div id="recipeGrid" class="recipe-grid"></div><p id="emptyState" class="empty hidden">Nenhuma receita encontrada.</p>
+</div></section>
+
+<section id="favoritos" class="section soft"><div class="container"><div class="section-heading"><div><span class="eyebrow">SEUS FAVORITOS</span><h2>Receitas salvas</h2></div></div><div id="favoriteGrid" class="recipe-grid"></div><p id="favoriteEmpty" class="empty">Você ainda não favoritou nenhuma receita.</p></div></section>
+
+<section id="ranking" class="section"><div class="container"><div class="section-heading centered"><span class="eyebrow">RANKING</span><h2>As receitas mais bem avaliadas</h2></div><div id="rankingGrid" class="ranking-grid"></div></div></section>
+
+<section id="dicas" class="section soft"><div class="container"><div class="section-heading centered"><span class="eyebrow">DICAS DE COZINHA</span><h2>Truques que fazem diferença</h2></div>
+<div class="tips-grid"><article class="tip reveal"><span>🔪</span><h3>Organize antes</h3><p>Separe ingredientes e utensílios antes de começar.</p></article><article class="tip reveal"><span>🧂</span><h3>Tempere aos poucos</h3><p>Prove durante o preparo e ajuste os temperos gradualmente.</p></article><article class="tip reveal"><span>🔥</span><h3>Controle o fogo</h3><p>Use a temperatura adequada para cada etapa da receita.</p></article></div>
+</div></section>
+</main>
+<footer><div class="container footer-content"><strong>🍳 Sabor & Panela</strong><span>Receitas para todos os dias • 2026</span></div></footer>
+</div>
+
+<div id="recipeModal" class="modal hidden"><div class="modal-backdrop" data-close></div><article class="modal-card">
+<button class="close-btn" data-close>×</button><div id="modalEmoji" class="modal-emoji"></div><span id="modalCategory" class="tag"></span>
+<h2 id="modalTitle"></h2><p id="modalDescription" class="modal-description"></p>
+<div class="recipe-meta"><span>⏱ <b id="modalTime"></b></span><span>👥 <b id="modalServings"></b></span><span>📊 <b id="modalDifficulty"></b></span></div>
+<div class="modal-actions"><button id="favoriteBtn" class="secondary-btn"></button><button id="shareBtn" class="primary-btn">📤 Compartilhar</button></div>
+<div class="recipe-columns"><div><h3>Ingredientes</h3><ul id="modalIngredients"></ul></div><div><h3>Modo de preparo</h3><ol id="modalSteps"></ol></div></div>
+<hr><section class="reviews"><h3>⭐ Avalie esta receita</h3><div id="starPicker" class="star-picker"></div><textarea id="reviewText" placeholder="Conte o que achou da receita..."></textarea><button id="reviewBtn" class="primary-btn">Enviar avaliação</button><p id="reviewMessage" class="form-message"></p><div id="reviewsList"></div></section>
+</article></div>
+<script src="script.js"></script>
+</body></html>
